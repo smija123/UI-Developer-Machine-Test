@@ -1,0 +1,43 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin button-styles($bg-color, $text-color, $border-color, $border-radius) {
+  display: inline-block;
+  background-color: $bg-color;
+  color: $text-color;
+  // padding: $padding;
+  border: 0.5px solid $border-color;
+  border-radius: $border-radius;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $text-color;
+    border-color: $bg-color;
+    color: $bg-color;
+  }
+}
+@function px-to-rem($pxValue, $baseFontSize: 16px) {
+  @return $pxValue / $baseFontSize * 1rem;
+}
+@mixin rem($size, $baseFontSize: 16px, $breakpoints: (
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  x-large: 1200px
+)) {
+  font-size: px-to-rem($size, $baseFontSize);
+
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      font-size: px-to-rem($size, $baseFontSize);
+    }
+  }
+}
+
+
+//style button
